@@ -1,0 +1,364 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="code.xsl"?>
+<doc>
+    <assembly>
+        <name>Assembly-CSharp</name>
+    </assembly>
+    <members>
+        <member name="M:GameplayGM.Update">
+            <summary>Updates this instance every frame.</summary>
+        </member>
+        <member name="M:GameplayGM.GameOver">
+            <summary>
+            Waits a couple seconds then takes you to the game over screen
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BreakWall">
+            <summary>
+            Used to make walls destructable
+            </summary>
+        </member>
+        <member name="M:BreakWall.Update">
+            <summary>
+            If the walls HP reached below 0, it is destroyed
+            </summary>
+        </member>
+        <member name="T:Enemy">
+            <summary>
+            This is a abstract class that details variables and methods all enemies should have, such as a name, health, maxspeed,
+            acceleration, and weapon. 
+            </summary>
+        </member>
+        <member name="M:Enemy.Movement">
+            <summary>
+            Here so all enemies impliment a movement method
+            </summary>
+        </member>
+        <member name="M:Enemy.Attack">
+            <summary>
+            Here so all enemies impliment a attack method
+            </summary>
+        </member>
+        <member name="T:EyeballEnemy">
+            <summary>
+            Script for the Eyeball enemy, controlling movement, attacks, and behavior of the enemy
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.Start">
+            <summary>
+            Upon creation, sets the shots cooldown, finds the nearest player, marks its position, and also marks the position of its pathing nodes
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.Update">
+            <summary>
+            Every frame, the Eyeball checks it HP, checks for the nearest player to aom, gets their positions and distance away from them.
+            If the player is within the Eyeballs lookRadius the eyeball will shoot a laser at them as it moves along its determined path. 
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.checkHealth">
+            <summary>
+            Checks the Objects HP. If it is below 0, the enemy is destroyed.
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.getNearestPlayer">
+            <summary>
+            Creates a list of all players, calculates the distance from the ghost to each one, then returns the closest player to aim at. 
+            </summary>
+            <returns> The nearest player. </returns>
+        </member>
+        <member name="M:EyeballEnemy.faceTarget">
+            <summary>
+            Gets the direction facing the player, calculates where it needs to rotate to face the player, then slowly rotates towards them. 
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.Attack">
+            <summary>
+            Shoots an projectile, waiting till the cooldown is over to shoot another object
+            </summary>
+        </member>
+        <member name="M:EyeballEnemy.OnTriggerEnter(UnityEngine.Collider)">
+            <summary>
+            Checks if the object the ghost's hitbox collides with is indeed a player, and only deals damage if they are one. 
+            </summary>
+            <param name="other"> The Objects Collider/hitbox that is being hit. </param>
+        </member>
+        <member name="M:EyeballEnemy.DealDamage(Characterable)">
+            <summary>
+            Subtracts health from the target that is being dealt damage. 
+            </summary>
+            <param name="target"> The Player character receiving the attack damage. </param>
+        </member>
+        <member name="M:EyeballEnemy.Movement">
+            <summary>
+            Moves the Eyeball between two nodes at a fixed rate of speed
+            </summary>
+        </member>
+        <member name="T:GhostSmovement">
+            <summary>
+            This class is the enemy script for the Ghost Enemy, detailing its AI, attacks, movement, and values such as HP. 
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.Start">
+            <summary>
+            Upon creation, the ghost will save the nearest player and its own body as private variables. 
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.Update">
+            <summary>
+            Every frame, the ghost checks it HP, checks for the nearest player to follow, gets their positions and distance away from them.
+            If the player is within the ghosts lookRadius the ghost will move towards them, and attack them if they are within range. 
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.checkHealth">
+            <summary>
+            Checks the Objects HP. If it is below 0, the enemy is destroyed.
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.faceTarget">
+            <summary>
+            Gets the direction facing the player, calculates where it needs to rotate to face the player, then slowly rotates towards them. 
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.getNearestPlayer">
+            <summary>
+            Creates a list of all players, calculates the distance from the ghost to each one, then returns the closest player to follow. 
+            </summary>
+            <returns> The nearest player. </returns>
+        </member>
+        <member name="M:GhostSmovement.Attack">
+            <summary>
+            Transitions the ghosts attack animation which contains hit boxes that damage 
+            </summary>
+        </member>
+        <member name="M:GhostSmovement.OnTriggerEnter(UnityEngine.Collider)">
+            <summary>
+            Checks if the object the ghost's hitbox collides with is indeed a player, and only deals damage if they are one. 
+            </summary>
+            <param name="other"> The Objects Collider/hitbox that is being hit. </param>
+        </member>
+        <member name="M:GhostSmovement.DealDamage(Characterable)">
+            <summary>
+            Subtracts health from the target that is being dealt damage. 
+            </summary>
+            <param name="target"> The Player character receiving the attack damage. </param>
+        </member>
+        <member name="M:GhostSmovement.Movement">
+            <summary>
+            Movement happens in the update method, and is not called as a result. 
+            </summary>
+        </member>
+        <member name="M:BallButton.OnTriggerEnter(UnityEngine.Collider)">
+            <summary>
+            This add how many clickes you have done and gives you a cue that you have clicked
+            This also shows if you clicked to many times
+            </summary>
+            <param name="collision"></param>
+        </member>
+        <member name="M:BallButton.OnTriggerExit(UnityEngine.Collider)">
+            <summary>
+            This checks if you can click and gives you a visual cue that you can
+            </summary>
+            <param name="collision"></param>
+        </member>
+        <member name="M:BallButton.GiveHint">
+            <summary>
+            This gives the hint
+            </summary>
+        </member>
+        <member name="M:BallButton.FlashHint">
+            <summary>
+             This is where the flash hint is made so if a player fails the puzzle it will show the hint
+            </summary>
+        </member>
+        <member name="M:BallPuzzle.Reset">
+            if the puzzle is done incorrectly it will reset
+        </member>
+        <member name="M:BallPuzzle.Complete">
+            <summary>
+            This see if the puzzle is complete
+            </summary>
+        </member>
+        <member name="M:BallPuzzle.Checkstatus">
+            this checks how many times the ball has been clicked and if it is the color changes to indicate success
+        </member>
+        <member name="M:BallPuzzle.StartPuzzle">
+            <summary>
+            This starts the puzzle and gives a hint of how many times a ball needs to be clicked
+            </summary>
+        </member>
+        <member name="M:KillEnemysPuzzle.Start">
+            <summary>
+            Start is called before the first frame update
+            This is also where the enemies are made
+            </summary>
+        </member>
+        <member name="M:KillEnemysPuzzle.Update">
+            <summary>
+            Update is called once per frame 
+            This checks the number of enemies in a room and if they are all dead the puzzle will complete
+            </summary>    
+        </member>
+        <member name="M:KillEnemysPuzzle.StartPuzzle">
+            <summary>
+            This sets all of the emenies to active or alive
+            </summary>
+        </member>
+        <member name="M:LevelMaster.StartLevel">
+            <summary>
+            starts the level a little late
+            </summary>
+        </member>
+        <member name="M:LevelMaster.startLate">
+            <summary>
+            Starts the level a little late so there isnt any errors
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PressurePlatePuzzle.OnCollisionStay(UnityEngine.Collision)">
+            <summary>
+            This checks to see how many players are on the pressure plate and if all of them are on it the puzzle completes
+            </summary>
+        </member>
+        <member name="M:PressurePlatePuzzle.OnCollisionExit(UnityEngine.Collision)">
+            <summary>
+            This removes the player if they leave the pad
+            </summary>
+        </member>
+        <member name="T:Puzzles">
+            <summary>
+            This interface makes it so that we can make multiple puzzles by implementing this code
+            </summary>
+        </member>
+        <member name="T:PillarProjectileScript">
+            <summary>
+            The Pillar Projectile is the script that controls the operations of the shooting pillars projectiles. 
+            </summary>
+        </member>
+        <member name="M:PillarProjectileScript.Start">
+            <summary>
+            Upon creation sets the objects original position as well as its damage
+            </summary>
+        </member>
+        <member name="M:PillarProjectileScript.Update">
+            <summary>
+            Nothing happenes each frame
+            </summary>
+        </member>
+        <member name="M:PillarProjectileScript.OnCollisionEnter(UnityEngine.Collision)">
+            <summary>
+            Checks if what is being collided with is not a player and does damage to them if they are not. Upon collision, the object will be destroyed
+            and respawn at its original position on the pillar. If the projectile misses, afer a certain amount of time, the ball will be returned to 
+            its original position.
+            </summary>
+            <param name="collision"> The Object that the projectile is collding with (Specifically their hitbox) </param>
+        </member>
+        <member name="M:PillarProjectileScript.scaleEffect">
+            <summary>
+            A method used to create a increasing size effect over time just when the ball respawns. The player must wait a bit of time for the ball 
+            to return to its original size after being hit. 
+            </summary>
+            <returns> An IEnumerator, that is used for assycronous method </returns>
+        </member>
+        <member name="M:PillarProjectileScript.Timer">
+            <summary>
+            After a certain amount of time, sets the projectile to its original position and causes the scale effect
+            </summary>
+            <returns> An IEnumerator, that is used for assycronous method </returns>
+        </member>
+        <member name="M:PillarProjectileScript.StartAttack">
+            <summary>
+            Started method to start the corritines in the object that allows for its attack to work. 
+            </summary>
+        </member>
+        <member name="M:WebsocketClient.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WebSocketHandler"/> class.
+            </summary>
+            <param name="serverURL">Server URL.</param>
+        </member>
+        <member name="M:WebsocketClient.Connect">
+            <summary>
+            Method which connects client to the server.
+            </summary>
+            <returns>The connect.</returns>
+        </member>
+        <member name="M:WebsocketClient.IsConnecting">
+            <summary>
+            Return if is connecting to the server.
+            </summary>
+            <returns><c>true</c>, if is connecting to the server, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:WebsocketClient.IsConnectionOpen">
+            <summary>
+            Return if connection with server is open.
+            </summary>
+            <returns><c>true</c>, if connection with server is open, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:WebsocketClient.Send(System.String)">
+            <summary>
+            Method used to send a message to the server.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:WebsocketClient.RunSend">
+            <summary>
+            Method for other thread, which sends messages to the server.
+            </summary>
+        </member>
+        <member name="M:WebsocketClient.Receive(System.UInt64)">
+            <summary>
+            Reads the message from the server.
+            </summary>
+            <returns>The message.</returns>
+            <param name="maxSize">Max size.</param>
+        </member>
+        <member name="M:WebsocketClient.RunReceive">
+            <summary>
+            Method for other thread, which receives messages from the server.
+            </summary>
+        </member>
+        <member name="T:Timer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Timer.timeRemaining">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Timer.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Timer.setTimer(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="T:EnemyProjectile">
+            <summary>
+            The version of the Projectile weaponthe specifcally checked if what it is colliding is a player and deals damage to them. Shot from an enemy.
+            </summary>
+        </member>
+        <member name="M:EnemyProjectile.Start">
+            <summary>
+            Nothing is done on start up
+            </summary>
+        </member>
+        <member name="M:EnemyProjectile.Update">
+            <summary>
+            Nothing is done each frame
+            </summary>
+        </member>
+        <member name="M:EnemyProjectile.OnTriggerEnter(UnityEngine.Collider)">
+            <summary>
+            On collision, checks if the object is a player, and if they are does damage. 
+            </summary>
+            <param name="other"> The Objects' collider that the projectile is hitting </param>
+        </member>
+    </members>
+</doc>
